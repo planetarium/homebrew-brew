@@ -17,8 +17,11 @@ cask "planet" do
   binary "planet"
 
   postflight do
-    set_permissions "#{staged_path}/planet", "0755"
     if OS.mac? && Hardware::CPU.arm?
+      Dir::Tmpname.create("workaround") do |tmppath|
+        FileUtils.cp "#{staged_path}/planet", tmppath
+        FileUtils.mv tmppath, "#{staged_path}/planet"
+      end
       system "/usr/bin/codesign",
              "--sign",
              "-",
@@ -26,5 +29,17 @@ cask "planet" do
              "--preserve-metadata=entitlements,requirements,flags,runtime",
              "#{staged_path}/planet"
     end
+    set_permissions "#{staged_path}/planet", "0755"
+    (HOMEBREW_PREFIX/"etc"/"bash_completion.d"/"planet").write(
+      system_command("#{staged_path}/planet", args: ["--completion", "bash"]).stdout,
+    )
+    (HOMEBREW_PREFIX/"share"/"zsh"/"site-functions"/"planet").write(
+      system_command("#{staged_path}/planet", args: ["--completion", "zsh"]).stdout,
+    )
+  end
+
+  uninstall_postflight do
+    (HOMEBREW_PREFIX/"etc"/"bash_completion.d"/"planet").unlink
+    (HOMEBREW_PREFIX/"share"/"zsh"/"site-functions"/"planet").unlink
   end
 end
