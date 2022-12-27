@@ -1,9 +1,9 @@
 cask "planet" do
   arch arm: "arm64", intel: "x64"
 
-  version "0.45.2"
-  sha256 arm:   "885b1f8f7c90647fe92b18bcb063a26ed89a8294d2843b13e9d7d3d95e019db7",
-         intel: "2c9a8d67b5a7617acfcef966a72cef048c41eb39d0bfb7fa35ac5aeca96169f0"
+  version "0.45.3"
+  sha256 arm:   "cc4ff1f753613089708984c2fd4ca0e429b014f3f130ec1e0c47ae86d94eb133",
+         intel: "fc774e4ea2a02443be1c9553521c5ca56cfc241a621c0f3db44aed7c26bb8fbd"
 
   url "https://github.com/planetarium/libplanet/releases/download/#{version}/planet-#{version}-osx-#{arch}.tar.xz",
       verified: "github.com/planetarium/libplanet/"
@@ -17,7 +17,7 @@ cask "planet" do
   binary "planet"
 
   postflight do
-    if OS.mac? && Hardware::CPU.arm? # rubocop:disable Homebrew/MoveToExtendOS
+    if OS.send(:mac?) && Hardware::CPU.arm?
       Dir::Tmpname.create("workaround") do |tmppath|
         FileUtils.cp "#{staged_path}/planet", tmppath
         FileUtils.mv tmppath, "#{staged_path}/planet"
