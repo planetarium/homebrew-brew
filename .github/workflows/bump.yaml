@@ -10,7 +10,7 @@ jobs:
     steps:
     - uses: macauley/action-homebrew-bump-cask@v1
       with:
-        token: ${{ github.secret }}
+        token: ${{ secrets.HOMEBREW_GITHUB_API_TOKEN }}
         tap: ${{ github.repository_owner }}/homebrew-brew
         cask: planet # Comma separated list
         livecheck: true
