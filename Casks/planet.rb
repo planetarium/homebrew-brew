@@ -1,9 +1,9 @@
 cask "planet" do
   arch arm: "arm64", intel: "x64"
 
-  version "3.2.0"
-  sha256 arm:   "7755c9f395e8aceaace1b7c48560cade9e9ad562c328c29ba2f83f40f86bf281",
-         intel: "7f1b5b28e4d0d5d80ad2488ff59c36e2d9dcfdf0e4bcd7d0bae8f8bbb0f701db"
+  version "3.3.0"
+  sha256 arm:   "ff6c6e4e094a07e976bfae77f378a89fb967ea5d907f698f47511aefa773f397",
+         intel: "b8ce69c4fc8ee0d39fa11c0e3ba505315e07138de1b6aac3653f122a7059c81b"
 
   url "https://github.com/planetarium/libplanet/releases/download/#{version}/planet-#{version}-osx-#{arch}.tar.xz",
       verified: "github.com/planetarium/libplanet/"
