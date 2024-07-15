@@ -5,7 +5,7 @@ Here is Planetarium's official Homebrew tap.
 
 ~~~~ console
 brew tap planetarium/brew
-brew install planetarium/brew/planet
+brew install planetarium/brew/planet --no-quarantine  # See planetarium/homebrew-brew#41 issue.
 ~~~~
 
 
